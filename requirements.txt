@@ -1,0 +1,5 @@
+# all the needed dependencies are listed
+discord.py
+PyNaCl
+yt_dlp
+discord.py[voice]
