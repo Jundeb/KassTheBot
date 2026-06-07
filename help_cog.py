@@ -26,17 +26,14 @@ class help_cog(commands.Cog):
         help="Shows all the commands and their descriptions."
     )
     async def help(self, ctx):
-        helpCog = self.bot.get_cog("help_cog")
-        musicCog = self.bot.get_cog("music_cog")
-        commands = helpCog.get_commands() + musicCog.get_commands()
+        cogs = [self.bot.get_cog("help_cog"), self.bot.get_cog("music_cog")]
+        commands_list = [c for cog in cogs if cog for c in cog.get_commands()]
 
-        commandDescription = "**`kass <command>`** - Provides a description of all commands or a longer description of an input command.\n\n"
-        for command in commands:
-            message = command.help
-            commandDescription += f"**`kass {command.name}`** - {message}\n"
-        commandsEmbed = discord.Embed(
-            title = "Kass Commands",
-            description = commandDescription,
-            color = self.embedOrange
-        )
-        await ctx.send(embed=commandsEmbed)
+        desc = "**`kass <command>`** - Provides a description of all commands or a longer description of an input command.\n\n"
+        for command in commands_list:
+            desc += f"**`kass {command.name}`** - {command.help}\n"
+            if isinstance(command, commands.Group):
+                for sub in command.commands:
+                    desc += f"\u2003**`kass {command.name} {sub.name}`** - {sub.help}\n"
+
+        await ctx.send(embed=discord.Embed(title="Kass Commands", description=desc, color=self.embedOrange))
