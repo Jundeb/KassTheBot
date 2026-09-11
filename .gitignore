@@ -1,0 +1,11 @@
+/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.env
+.venv
+*volume.json
+/token.txt
+/guild_playlists.json
