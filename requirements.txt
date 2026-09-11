@@ -1,5 +1,5 @@
 # all the needed dependencies are listed
 discord.py
 PyNaCl
-yt_dlp
+yt_dlp>=2026.8.19
 discord.py[voice]
