@@ -69,7 +69,8 @@ EOF
 
 echo "==> Enabling and starting services"
 sudo systemctl daemon-reload
-sudo systemctl enable --now kassthebot.service
+sudo systemctl enable kassthebot.service
+sudo systemctl restart kassthebot.service
 sudo systemctl enable --now kassthebot-update.timer
 
 echo

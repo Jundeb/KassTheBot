@@ -470,9 +470,10 @@ class music_cog(commands.Cog):
         if self.vc[id] == None:
             await ctx.send("I am not connected to a voice channel.")
         elif self.queueIndex[id] + 1 >= len(self.musicQueue[id]):
-            await ctx.send("There are no more songs in the queue. Replaying the current song.")
-            self.vc[id].pause()
-            await self.play_music(ctx)
+            await ctx.send("There are no more songs in the queue. Stopping playback.")
+            self.is_playing[id] = False
+            self.queueIndex[id] += 1
+            self.vc[id].stop()
         else:
             self.vc[id].pause()
             self.queueIndex[id] += 1
